@@ -39,6 +39,25 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: node-app
+      - name: Azure Login
+        uses: Azure/login@v1.4.3
+        with:
+          # Paste output of `az ad sp create-for-rbac` as value of secret variable: AZURE_CREDENTIALS
+          creds: 3KdxvX1SUpex_j29axQSylioiceY~MiIZ7 # optional
+          # ClientId of the Azure Service principal created.
+          client-id: adbbed2f-0024-4400-b37b-a1317c9aa323 # optional
+          # TenantId of the Azure Service principal created.
+          tenant-id: ce73f19e-8c69-416b-8a92-45676035d0ea
+          # Azure subscriptionId
+          subscription-id: bf8c4305-315a-4734-b458-90c67560da65
+          # Set this value to true to enable Azure PowerShell Login in addition to Az CLI login
+          enable-AzPSSession: false
+          # Name of the environment. Supported values are azurecloud, azurestack, azureusgovernment, azurechinacloud, azuregermancloud. Default being azurecloud
+          environment: azurecloud # optional, default is azurecloud
+          # Set this value to true to enable support for accessing tenants without subscriptions
+          allow-no-subscriptions: true # optional
+          # Provide audience field for access-token. Default value is api://AzureADTokenExchange
+          audience: api://AzureADTokenExchange # optional, default is api://AzureADTokenExchange
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
